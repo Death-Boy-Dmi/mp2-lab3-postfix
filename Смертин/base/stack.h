@@ -22,6 +22,26 @@ public:
   {
     delete [] pMem;
   }
+  bool IsEmpty()
+  {
+	  return top = -1;
+  }
+  bool IsFull()
+  {
+	  return top = MaxStackSize - 1;
+  }
+  void Put(int val)
+  {
+	  if (IsFull())
+		  throw 1;
+	  pMem(++top) = val;
+  }
+  void Get()
+  {
+	  if (IsEmpty())
+		  throw 0;
+	  return pMem[top--];
+  }
 };
 
 #endif
