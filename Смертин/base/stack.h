@@ -36,7 +36,7 @@ public:
 		  throw 1;
 	  pMem(++top) = val;
   }
-  void Get()
+  int Get()
   {
 	  if (IsEmpty())
 		  throw 0;
