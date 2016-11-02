@@ -18,7 +18,7 @@ TEST(TStack, can_check_on_the_stack_empty)
 {
 	TStack<int> st(5);
 
-	ASSERT_NO_THROW(st.IsEmpty());
+	EXPECT_EQ(st.IsEmpty(),st.GetTop());
 }
 // Проверка Put() на исключения
 TEST(TStack, throw_when_use_Put_when_stack_is_full)
@@ -50,7 +50,7 @@ TEST(TStack, can_Put_and_Get)
 		st.Get();
 	}
 
-	ASSERT_NO_THROW(st.IsEmpty());
+	EXPECT_EQ(st.IsEmpty(), st.GetTop());
 }
 TEST(TStack, can_check_on_the_stack_full)
 {
@@ -58,5 +58,5 @@ TEST(TStack, can_check_on_the_stack_full)
 	for (int i = 0; i < 5; i++)
 		st.Put(i);
 
-	ASSERT_NO_THROW(st.IsFull());
+	EXPECT_EQ(st.IsFull(), (st.GetSize()-1));
 }
