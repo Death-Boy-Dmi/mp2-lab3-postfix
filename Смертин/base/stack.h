@@ -24,6 +24,7 @@ public:
   }
   bool IsEmpty()
   {
+	  if (top == -1) 
 		  return true;
   }
   bool IsFull()
@@ -31,13 +32,13 @@ public:
 	  if (top == size - 1) 
 		  return true;
   }
-  void Put(int val)
+  void Put(T val)
   {
 	  if (IsFull())
-		  throw 1;
+		  throw val;
 	  pMem[++top] = val;
   }
-  int Get()
+  T Get()
   {
 	  if (IsEmpty())
 		  throw 0;
