@@ -24,13 +24,11 @@ public:
   }
   bool IsEmpty()
   {
-	  if (top == -1) 
-		  return true;
+	  return top == (-1);
   }
   bool IsFull()
   {
-	  if (top == size - 1) 
-		  return true;
+	  return top == (size - 1);
   }
   void Put(T val)
   {
