@@ -47,9 +47,8 @@ public:
   {
 	  cin >> infix;
   }
-  bool CheckChars(string inf)
+  bool CheckChars()
   {
-	  infix = inf;
 	  string valval = "()*/-+.0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	  for (size_t i = 0; i < infix.length(); i++)
 	  {
