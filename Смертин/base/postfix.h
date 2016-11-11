@@ -3,6 +3,7 @@
 
 #include <string>
 #include "stack.h"
+#include <iostream>
 
 using namespace std;
 
@@ -45,6 +46,8 @@ public:
   TPostfix()
   {
     infix = "a + b";
+	  cin >> infix;
+  }
   bool CheckChars(string inf)
   {
 	  infix = inf;
