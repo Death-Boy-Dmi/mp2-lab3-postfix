@@ -45,6 +45,15 @@ public:
   TPostfix()
   {
     infix = "a + b";
+  bool CheckChars(string inf)
+  {
+	  infix = inf;
+	  string valval = "()*/-+.0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	  for (int i = 0; i < infix.length; i++)
+	  {
+		  if (valval.find(infix[i]) != std::string::npos)
+			  throw "An invalid character was fond";
+	  }
   }
   string GetInfix() { return infix; }
   string GetPostfix() { return postfix; }
