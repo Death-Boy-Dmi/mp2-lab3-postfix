@@ -37,17 +37,24 @@ TEST(TStack, throw_when_use_Get_when_stack_is_empty)
 	ASSERT_ANY_THROW(st.Get());	
 }
 
+TEST(TStack, can_use_Get)
+{
+	TStack<int> st(2);
+	st.Put(4);
+	ASSERT_NO_THROW(st.Get());
+}
+
+TEST(TStack, throw_when_use_Put_when_stack_is_Full)
+{
+	TStack<int> st(1);
+	st.Put(4);
+
+	ASSERT_ANY_THROW(st.Put(1));
+}
+
 TEST(TStack, can_use_Put)
 {
 	TStack<int> st(2);
 
 	ASSERT_NO_THROW(st.Put(0));
-}
-
-TEST(TStack, can_use_Get)
-{
-	TStack<int> st(2);
-	st.Put(0);
-
-	ASSERT_NO_THROW(st.Get());
 }
