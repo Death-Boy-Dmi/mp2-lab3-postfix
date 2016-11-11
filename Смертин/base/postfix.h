@@ -26,7 +26,7 @@ public:
 	{
 		string arop = "-*/+";
 		string var = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		for (int i = 0; i < str.length; i++)
+		for (size_t i = 0; i < str.length(); i++)
 			if (arop.find(str[i]) != std::string::npos)
 				if (var.find(str[(arop.find(str[i])) - 1]) != std::string::npos
 					&& var.find(str[(arop.find(str[i])) + 1]) != std::string::npos)
@@ -45,14 +45,13 @@ class TPostfix
 public:
   TPostfix()
   {
-    infix = "a + b";
 	  cin >> infix;
   }
   bool CheckChars(string inf)
   {
 	  infix = inf;
 	  string valval = "()*/-+.0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	  for (int i = 0; i < infix.length; i++)
+	  for (size_t i = 0; i < infix.length(); i++)
 	  {
 		  if (valval.find(infix[i]) != std::string::npos)
 			  throw "An invalid character was fond";
