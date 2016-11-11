@@ -25,7 +25,7 @@ TEST(TStack, can_check_on_the_stack_empty)
 
 TEST(TStack, can_check_on_the_stack_full)
 {
-	TStack<int> st(2);
+	TStack<int> st(1);
 	st.Put(4);
 	EXPECT_EQ(st.IsFull(), true);
 }
