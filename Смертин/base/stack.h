@@ -42,10 +42,6 @@ public:
 		  throw 0;
 	  return pMem[top--];
   }
-  int GetSize()
-  {
-	  return size;
-  }
 };
 
 #endif
