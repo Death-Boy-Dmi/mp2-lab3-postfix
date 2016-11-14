@@ -58,7 +58,7 @@ TEST(TStack, can_use_Put)
 
 	ASSERT_NO_THROW(st.Put(0));
 }
-Test(TStack, chek_Put_and_Get)
+TEST(TStack, chek_Put_and_Get)
 {
 	TStack<int> st(2);
 	st.Put(13);
