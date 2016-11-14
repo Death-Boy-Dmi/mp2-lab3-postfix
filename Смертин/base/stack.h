@@ -22,6 +22,26 @@ public:
   {
     delete [] pMem;
   }
+  bool IsEmpty()
+  {
+	  return top == (-1);
+  }
+  bool IsFull()
+  {
+	  return top == (size - 1);
+  }
+  void Put(T val)
+  {
+	  if (IsFull())
+		  throw val;
+	  pMem[++top] = val;
+  }
+  T Get()
+  {
+	  if (IsEmpty())
+		  throw 0;
+	  return pMem[top--];
+  }
 };
 
 #endif
