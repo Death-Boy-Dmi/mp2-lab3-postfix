@@ -33,6 +33,7 @@ class TPostfix
 	string infix;
 	string postfix;
 	string* variable;
+	size_t varSize;
 	TablFunc functions;
 
 public:
@@ -132,6 +133,7 @@ public:
 			  }
 		  }
 	  variable = new string[size];
+	  varSize = size;
 	  int k = 0;
 	  for (int i = 0; i < inf.size(); i++)
 		  while (k < size)
@@ -156,7 +158,7 @@ public:
 	  int i = 0;
 	  while (inf == 0)
 	  {
-		  while ( i < functions.GetSize())
+		  while ( i < varSize)
 		  {
 			  if (inf.found(variable[i]) == 0)
 			  {
