@@ -218,8 +218,11 @@ public:
 		  }
 
 		  if (inf[0] == '=')
+		  {
 			  while (operations.IsEmpty() != true)
 				  postfix += operations.Get();
+			  inf.erase(0);
+		  }
 	  }
   }
   double Calculate(); // Ввод переменных, вычисление по постфиксной форме
