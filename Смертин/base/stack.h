@@ -50,6 +50,10 @@ public:
   {
 	  return size;
   }
+  T GetValTop()
+  {
+	  return pMem[top];
+  }
 };
 
 #endif

@@ -22,6 +22,10 @@ struct TablFunc
 		func[5] = '/';	priority[5] = 2;
 		func[6] = '=';	priority[6] = 0;
 	}
+	GetSize()
+	{
+		return 7;
+	}
 };
 
 class TPostfix
@@ -35,6 +39,7 @@ public:
 	TPostfix()
 	{
 		cin >> infix;
+		postfix = 0;
 	}
   bool CheckChars() // Проверка на допустимые символы
   {
@@ -142,7 +147,66 @@ public:
   }
   string GetInfix() { return infix; }
   string GetPostfix() { return postfix; }
-  string ToPostfix();
+  string ToPostfix(string inf) 
+  {
+	  CheckInf();
+	  ArrVarible(inf);
+	  AddEqual(inf);
+	  TStack operations;
+	  int i = 0;
+	  while (inf == 0)
+	  {
+		  while ( i < functions.GetSize())
+		  {
+			  if (inf.found(variable[i]) == 0)
+			  {
+				  postfix += variable+'|';
+				  inf.erase(variable[i]);	//удалить подстроку
+				  break;
+			  }
+			  else
+				  break;
+			  i++;
+		  }
+
+		  if (inf[0] == '(')
+		  {
+			  operations.Put('(');
+			  inf.erase(0);
+		  }
+
+		  if (inf[0] == function.finc[2] || inf[0] == function.finc[3] || inf[0] == function.finc[4] || inf[0] == function.finc[5])
+		  {
+			  while (true)
+			  {
+				  if (operations.IsEmpty())
+					  operations.Put(inf[0]);
+				  if (inf[0] <= operations.GetValTop())
+				  {
+					  postfix += operations.Get();
+				  }
+				  else
+				  {
+					  operations.Put(inf[0]);
+					  break;
+				  }
+			  }
+			  inf.erase(0);
+		  }
+
+		  if (inf[0] == ')')
+		  {
+			  while (inf[0] != operations.GetValTop())
+				  postfix += operations.Get();
+			  operations.Get();
+			  inf.erase(0);
+		  }
+
+		  if (inf[0] == '=')
+			  while (operations.IsEmpty() != true)
+				  postfix += operations.Get();
+	  }
+  }
   double Calculate(); // Ввод переменных, вычисление по постфиксной форме
 };
 
