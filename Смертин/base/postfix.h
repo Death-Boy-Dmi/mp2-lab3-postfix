@@ -6,7 +6,9 @@
 #include <iostream>
 
 using namespace std;
+
 #define MaxSizeString 1000
+
 struct TablFunc
 {
 	char func[7];
@@ -35,12 +37,12 @@ class TPostfix
 public:
 	TPostfix()
 	{
+		cout << "Enter the expression (variable names - Latin letters):" << endl;
 		cin >> infix;
-		postfix = nullptr;
 	}
   bool CheckChars() // Проверка на допустимые символы
   {
-	  string valval = "()*/-+.0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	  string valval = "()*/-+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	  for (size_t i = 0; i < infix.length(); i++)
 	  {
 		  if (valval.find(infix[i]) != std::string::npos)
@@ -54,7 +56,7 @@ public:
   bool CheckAmount(string str) // Проверка соответствия кол-ва переменных кол-ву операций
   {
 	  string arop = "-*/+";
-	  string var = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	  string var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	  for (size_t i = 0; i < str.length(); i++)
 		  if (arop.find(str[i]) != std::string::npos)
 			  if (var.find(str[(arop.find(str[i])) - 1]) != std::string::npos
@@ -104,13 +106,13 @@ public:
 
 	  return true;
   }
-  /*string DeleteSpace(string inf) // Удаление пробелов
+  string DeleteSpace(string inf) // Удаление пробелов
   {
 	  infix = inf;
 	  for (int i = 0; i < infix.size(); i++)
 		  if (infix[i] == ' ')
 			  infix.erase(i, 1);
-  }*/
+  }
   string AddEqual (string inf) // Добавление равно в конец строки
   {
 	  return inf += '=';
@@ -159,7 +161,8 @@ public:
 			  if (inf.find(variable[i]) == 0)
 			  {
 				  postfix += variable[i] + '|';
-				  inf.erase(0, variable[i].length());	//удалить подстроку
+				  inf.erase(0, variable[i].length());
+				  i = 0;
 				  break;
 			  }
 			  else
@@ -225,7 +228,29 @@ public:
 		  }
 	  }
   }
-  double Calculate(); // Ввод переменных, вычисление по постфиксной форме
+  double Calculate() // Ввод переменных, вычисление по постфиксной форме
+  {
+	  cout << "Enter the arguments:" << endl;
+	  double* var = new double[varSize];
+	  for (int i = 0; i < varSize; i++)
+	  {
+		  cout << variable[i] << " = ";
+		  cin >> var[i];
+		  string c = "0123456789.";
+		  if (c.find(var[i]) != std::string::npos)
+			  throw "Permission incorrect value";
+		  cout << endl;
+	  }
+	  string post = postfix;
+	  TStack<double> varStack(varSize);
+	  int i = 0;
+	  while (i < varSize)
+	  {
+		  if (post.find(variable[i]) == 0)
+		  {
+
+		  }
+  }
 };
 
 #endif
