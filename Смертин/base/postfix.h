@@ -227,6 +227,7 @@ public:
 			  inf.erase(0);
 		  }
 	  }
+	  return postfix;
   }
   double Calculate() // Ввод переменных, вычисление по постфиксной форме
   {
@@ -242,14 +243,52 @@ public:
 		  cout << endl;
 	  }
 	  string post = postfix;
+	  double tempResult = 0;
+	  double result = 0;
 	  TStack<double> varStack(varSize);
 	  int i = 0;
-	  while (i < varSize)
+	  while (post.length() != 0)
 	  {
-		  if (post.find(variable[i]) == 0)
+		  while (i < varSize)
 		  {
-
+			  if (post.find(variable[i]) == 0)
+			  {
+				  varStack.Put(var[i]);
+				  post.erase(0, variable[i].length());
+				  i++;
+				  break;
+			  }
 		  }
+
+		  if (post[0] == '*')
+		  {
+			  double temp = varStack.Get();
+			  tempResult = varStack.Get() * temp;
+			  varStack.Put(tempResult);
+		  }
+
+		  if (post[0] == '/')
+		  {
+			  double temp = varStack.Get();
+			  tempResult = varStack.Get() / temp;
+			  varStack.Put(tempResult);
+		  }
+
+		  if (post[0] == '+')
+		  {
+			  double temp = varStack.Get();
+			  tempResult = varStack.Get() + temp;
+			  varStack.Put(tempResult);
+		  }
+
+		  if (post[0] == '-')
+		  {
+			  double temp = varStack.Get();
+			  tempResult = varStack.Get() - temp;
+			  varStack.Put(tempResult);
+		  }
+	  }
+	  return result = varStack.Get();
   }
 };
 
