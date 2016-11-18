@@ -61,10 +61,11 @@ public:
 		  {
 			  if ((var.find(str[i - 1]) >= 0 && var.find(str[i - 1]) <= var.length())
 				  && (var.find(str[i + 1]) >= 0 && var.find(str[i - 1]) <= var.length()))
-				  return true;
+				  continue;
 			  else
 				  return false;
 		  }
+	  return true;
   }
   bool CheckBrackets(string str) // Проверка количества скобок
   {
@@ -151,12 +152,13 @@ public:
   string ToPostfix() 
   {
 	  string inf = infix;
+	  postfix = "|";
 	  CheckInfix();
 	  ArrVarible(inf);
 	  inf = inf + "=";
 	  TStack<char> operations(MaxSizeString);
 	  int i = 0;
-	  while (inf.length() == 0)
+	  while (inf.length() != 0)
 	  {
 		  while ( i < varSize)
 		  {
@@ -164,7 +166,7 @@ public:
 			  {
 				  postfix += variable[i] + '|';
 				  inf.erase(0, variable[i].length());
-				  i = 0;
+				  i ++;
 				  break;
 			  }
 			  else
@@ -175,15 +177,18 @@ public:
 		  if (inf[0] == '(')
 		  {
 			  operations.Put('(');
-			  inf.erase(0);
+			  inf.erase(0,1);
 		  }
 
 		  if (inf[0] == functions.func[2] || inf[0] == functions.func[3] || inf[0] == functions.func[4] || inf[0] == functions.func[5])
 		  {
 			  while (true)
 			  {
-				    if (operations.IsEmpty())
+				  if (operations.IsEmpty())
+				  {
 					  operations.Put(inf[0]);
+					  break;
+				  }
 					int i = 2;
 					int j = 2;
 					while (i < 6)
@@ -203,6 +208,7 @@ public:
 					if (functions.priority[i] <= functions.priority[j])
 						{
 							postfix += operations.Get();
+							break;
 						}
 						else
 						{
@@ -211,7 +217,7 @@ public:
 						}
 
 					}
-			  inf.erase(0);
+			  inf.erase(0,1);
 		  }
 
 		  if (inf[0] == ')')
@@ -219,14 +225,14 @@ public:
 			  while (inf[0] != operations.GetValTop())
 				  postfix += operations.Get();
 			  operations.Get();
-			  inf.erase(0);
+			  inf.erase(0,1);
 		  }
 
 		  if (inf[0] == '=')
 		  {
 			  while (operations.IsEmpty() != true)
 				  postfix += operations.Get();
-			  inf.erase(0);
+			  inf.erase(0,1);
 		  }
 	  }
 	  return postfix;
