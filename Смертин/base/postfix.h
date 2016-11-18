@@ -45,9 +45,8 @@ public:
 	  string valval = "()*/-+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	  for (size_t i = 0; i < infix.length(); i++)
 	  {
-		  if (valval.find(infix[i]) != std::string::npos)
+		  if (valval.find(infix[i]) == std::string::npos)
 		  {
-			  return false;
 			  throw "An invalid character was fond";
 		  }
 	  }
@@ -115,27 +114,24 @@ public:
   }
   string AddEqual (string inf) // Добавление равно в конец строки
   {
-	  return inf += '=';
+	  return inf = inf + "=";
   }
   void ArrVarible(string inf) // Выделение из строки переменных и добавление их в массив
   {
 	  size_t size = 0;
-	  for (int i = 0; i < infix.size(); i++)
-		  if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/' || inf[i] == '(' || inf[i] == ')')
-		  {
-			  if (inf[i] == '=')
-				  break;
-			  else
-			  {
-				  size++;
-			  }
-		  }
+	  CheckInfix();
+	  inf = inf + "=";
+	  for (int i = 0; i < inf.size(); i++)
+		  if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/' || inf[i] == '=' )
+			  size++;
 	  variable = new string[size];
 	  varSize = size;
 	  int k = 0;
-	  for (int i = 0; i < inf.size(); i++)
+	  int i = 0;
+	  while (inf.length() != 0)
+	  {
 		  while (k < size)
-			  if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/' || inf[i] == '(' || inf[i] == ')')
+			  if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/' || inf[i] == ')' || inf[i] == '=')
 			  {
 				  for (int j = 0; j < i; j++)
 				  {
@@ -144,14 +140,15 @@ public:
 				  inf.erase(0, i);
 				  k++;
 			  }
+		  i++;
+	  }
   }
-  string GetInfix() { return infix; }
-  string GetPostfix() { return postfix; }
-  string ToPostfix(string inf) 
+  string ToPostfix() 
   {
+	  string inf = infix;
 	  CheckInfix();
 	  ArrVarible(inf);
-	  AddEqual(inf);
+	  inf = inf + "=";
 	  TStack<char> operations(MaxSizeString);
 	  int i = 0;
 	  while (inf.length() == 0)
@@ -290,6 +287,8 @@ public:
 	  }
 	  return result = varStack.Get();
   }
+  string GetInfix() { return infix; }
+  string GetPostfix() { return postfix; }
 };
 
 #endif
