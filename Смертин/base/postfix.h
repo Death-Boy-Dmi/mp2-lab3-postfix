@@ -57,34 +57,33 @@ public:
 	  string arop = "-*/+";
 	  string var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	  for (size_t i = 0; i < str.length(); i++)
-		  if (arop.find(str[i]) != std::string::npos)
-			  if (var.find(str[(arop.find(str[i])) - 1]) != std::string::npos
-				  && var.find(str[(arop.find(str[i])) + 1]) != std::string::npos)
+		  if (arop.find(str[i]) >= 0 && arop.find(str[i]) <= str.length())
+		  {
+			  if ((var.find(str[i - 1]) >= 0 && var.find(str[i - 1]) <= var.length())
+				  && (var.find(str[i + 1]) >= 0 && var.find(str[i - 1]) <= var.length()))
 				  return true;
 			  else
 				  return false;
-		  else
-			  throw "The arithmetic operation is not found";
+		  }
   }
   bool CheckBrackets(string str) // Проверка количества скобок
   {
 	  string temp = str;
-	  if (temp.find("()"))
+	  if (temp.find('(') == std::string::npos && temp.find(')') == std::string::npos)
+		  return true;
+	  if (temp.find("()") >= 0 && temp.find("()") <= temp.length())
 	  {
-		  return false;
 		  throw "Detected is ''()''";
 	  }
-	  while (temp.find('(') == std::string::npos && temp.find(')') == std::string::npos)
+	  while (temp.find('(') == std::string::npos || temp.find(')') == std::string::npos)
 	  {
-		  if (temp.find('(') != std::string::npos)
-			  if (temp.find(')') != std::string::npos)
+		  if (temp.find('(') < temp.find(')'))
 			  {
 				  temp[temp.find('(')] = ' ';
 				  temp[temp.find(')')] = ' ';
 			  }
 			  else
 			  {
-				  return false;
 				  throw "Incorrect number of brackets";
 			  }
 	  }
@@ -122,27 +121,33 @@ public:
 	  CheckInfix();
 	  inf = inf + "=";
 	  for (int i = 0; i < inf.size(); i++)
-		  if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/' || inf[i] == '=' )
+		  if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/' || inf[i] == '=')
 			  size++;
 	  variable = new string[size];
+	  for (int i = 0; i < size; i++)
+		  variable[i] = "";
 	  varSize = size;
 	  int k = 0;
-	  int i = 0;
+	  for (int i = 0; i < inf.length(); i++)
+	  {
+		  if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/' || inf[i] == ')' || inf[i] == '=' || inf[i] == '(')
+			  inf[i] = ' ';
+	  }
 	  while (inf.length() != 0)
 	  {
-		  while (k < size)
-			  if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/' || inf[i] == ')' || inf[i] == '=')
+		  if (inf.find(' ') >= 0 && inf.find(' ') <=inf.length())
+		  {
+			  size_t pos = inf.find(' ');
+			  for (int j = 0; j < pos; j++)
 			  {
-				  for (int j = 0; j < i; j++)
-				  {
-					  variable[k] += inf[j];
-				  }
-				  inf.erase(0, i);
-				  k++;
+				  variable[k] += inf[j];
 			  }
-		  i++;
+			  inf.erase(0, pos + 1);
+			  k++;
+		  }
 	  }
   }
+  
   string ToPostfix() 
   {
 	  string inf = infix;

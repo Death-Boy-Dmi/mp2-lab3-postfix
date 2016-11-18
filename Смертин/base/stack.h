@@ -1,7 +1,7 @@
 ﻿#ifndef __STACK_H__
 #define __STACK_H__
 
-const int MaxStackSize = 100;
+const int MaxStackSize = 1000;
 
 template <class T>
 class TStack
