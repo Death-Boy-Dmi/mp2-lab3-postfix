@@ -131,8 +131,15 @@ public:
 	  int k = 0;
 	  for (int i = 0; i < inf.length(); i++)
 	  {
-		  if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/' || inf[i] == ')' || inf[i] == '=' || inf[i] == '(')
+		  if (inf[i] == '+' || inf[i] == '-' || inf[i] == '*' || inf[i] == '/'  || inf[i] == '=')
 			  inf[i] = ' ';
+	  }
+	  while (inf.find('(') != std::string::npos || inf.find(')') != std::string::npos)
+	  {
+		  if (inf.find(')') >= 0 && inf.find(')') <= inf.length())
+			  inf.erase(inf.find(')'), 1);
+		  if (inf.find('(') >= 0 && inf.find('(') <= inf.length())
+			  inf.erase(inf.find('('), 1);
 	  }
 	  while (inf.length() != 0)
 	  {
@@ -152,7 +159,7 @@ public:
   string ToPostfix() 
   {
 	  string inf = infix;
-	  postfix = "|";
+	  postfix = "";
 	  CheckInfix();
 	  ArrVarible(inf);
 	  inf = inf + "=";
@@ -164,7 +171,7 @@ public:
 		  {
 			  if (inf.find(variable[i]) == 0)
 			  {
-				  postfix += variable[i] + '|';
+				  postfix += variable[i] + ' ';
 				  inf.erase(0, variable[i].length());
 				  i ++;
 				  break;
