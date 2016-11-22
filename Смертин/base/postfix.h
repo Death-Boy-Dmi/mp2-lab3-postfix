@@ -285,6 +285,7 @@ public:
 			  double temp = varStack.Get();
 			  tempResult = varStack.Get() * temp;
 			  varStack.Put(tempResult);
+			  post.erase(0, 1);
 		  }
 
 		  if (post[0] == '/')
@@ -292,6 +293,7 @@ public:
 			  double temp = varStack.Get();
 			  tempResult = varStack.Get() / temp;
 			  varStack.Put(tempResult);
+			  post.erase(0, 1);
 		  }
 
 		  if (post[0] == '+')
@@ -299,6 +301,7 @@ public:
 			  double temp = varStack.Get();
 			  tempResult = varStack.Get() + temp;
 			  varStack.Put(tempResult);
+			  post.erase(0, 1);
 		  }
 
 		  if (post[0] == '-')
@@ -306,6 +309,7 @@ public:
 			  double temp = varStack.Get();
 			  tempResult = varStack.Get() - temp;
 			  varStack.Put(tempResult);
+			  post.erase(0, 1);
 		  }
 	  }
 	  return result = varStack.Get();
