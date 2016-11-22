@@ -258,6 +258,9 @@ public:
 		  cout << endl;
 	  }
 	  string post = postfix;
+	  for (int i = 0; i < post.size(); i++)
+		  if (post[i] == ' ')
+			  post.erase(i, 1);
 	  double tempResult = 0;
 	  double result = 0;
 	  TStack<double> varStack(varSize);
