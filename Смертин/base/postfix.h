@@ -229,7 +229,7 @@ public:
 
 		  if (inf[0] == ')')
 		  {
-			  while (inf[0] != operations.GetValTop())
+			  while (operations.GetValTop() != '(')
 				  postfix += operations.Get();
 			  operations.Get();
 			  inf.erase(0,1);
@@ -273,6 +273,8 @@ public:
 				  i++;
 				  break;
 			  }
+			  else
+				  break;
 		  }
 
 		  if (post[0] == '*')
