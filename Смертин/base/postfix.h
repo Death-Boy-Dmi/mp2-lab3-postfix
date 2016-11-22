@@ -183,6 +183,8 @@ public:
 
 		  if (inf[0] == '(')
 		  {
+			  if (operations.IsEmpty() == false)
+				  postfix += operations.Get();
 			  operations.Put('(');
 			  inf.erase(0,1);
 		  }
@@ -215,6 +217,7 @@ public:
 					if (functions.priority[i] <= functions.priority[j])
 						{
 							postfix += operations.Get();
+							operations.Put(inf[0]);
 							break;
 						}
 						else
