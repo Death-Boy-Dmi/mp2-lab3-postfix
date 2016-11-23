@@ -35,10 +35,10 @@ class TPostfix
 	TablFunc functions;
 
 public:
-	TPostfix()
+	TPostfix(string inf)
 	{
-		cout << "Enter the expression (variable names - Latin letters):" << endl;
-		cin >> infix;
+		infix = inf;
+		CheckInfix();
 	}
   bool CheckChars() // Проверка на допустимые символы
   {
@@ -63,7 +63,7 @@ public:
 				  && (var.find(str[i + 1]) >= 0 && var.find(str[i - 1]) <= var.length()))
 				  continue;
 			  else
-				  return false;
+				  throw "the number of variables does not correspond to the numbers of operations";
 		  }
 	  return true;
   }
@@ -92,32 +92,18 @@ public:
   }
   bool CheckInfix() // Общая проверка
   {
-	  if (CheckChars() == false) 
-		  return false;
+	  CheckChars();
+	  CheckAmount(infix);
+	  CheckBrackets(infix);
 	  if (infix[0] == ')' || infix[0] == '*' || infix[0] == '/' || infix[0] == '-' || infix[0] == '+')
-		  return false;
+		  throw "First character is operations";
 	  if (infix[infix.length()] == '(' || infix[infix.length()] == '*' || infix[infix.length()] == '/' || infix[infix.length()] == '-' || infix[infix.length()] == '+')
-		  return false;
-	  if (CheckAmount(infix) == false)
-		  return false;
-	  if (CheckBrackets(infix) == false)
-		  return false;
-
+		  throw "Last character is operations";
 	  return true;
   }
-  string DeleteSpace(string inf) // Удаление пробелов
+  void ArrVarible() // Выделение из строки переменных и добавление их в массив
   {
-	  infix = inf;
-	  for (int i = 0; i < infix.size(); i++)
-		  if (infix[i] == ' ')
-			  infix.erase(i, 1);
-  }
-  string AddEqual (string inf) // Добавление равно в конец строки
-  {
-	  return inf = inf + "=";
-  }
-  void ArrVarible(string inf) // Выделение из строки переменных и добавление их в массив
-  {
+	  string inf = infix;
 	  size_t size = 0;
 	  CheckInfix();
 	  inf = inf + "=";
@@ -155,13 +141,16 @@ public:
 		  }
 	  }
   }
-  
+  string* GetArrVar()
+  {
+	  return variable;
+  }
   string ToPostfix() 
   {
 	  string inf = infix;
 	  postfix = "";
 	  CheckInfix();
-	  ArrVarible(inf);
+	  ArrVarible();
 	  inf = inf + "=";
 	  TStack<char> operations(MaxSizeString);
 	  int i = 0;
