@@ -52,8 +52,9 @@ public:
 	  }
 	  return true;
   }
-  bool CheckAmount(string str) // Проверка соответствия кол-ва переменных кол-ву операций
+  bool CheckAmount() // Проверка соответствия кол-ва переменных кол-ву операций
   {
+	  string str = infix;
 	  string arop = "-*/+";
 	  string var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	  for (size_t i = 0; i < str.length(); i++)
@@ -67,8 +68,9 @@ public:
 		  }
 	  return true;
   }
-  bool CheckBrackets(string str) // Проверка количества скобок
+  bool CheckBrackets() // Проверка количества скобок
   {
+	  string str;
 	  string temp = str;
 	  if (temp.find('(') == std::string::npos && temp.find(')') == std::string::npos)
 		  return true;
@@ -78,23 +80,25 @@ public:
 	  }
 	  while (temp.find('(') == std::string::npos || temp.find(')') == std::string::npos)
 	  {
-		  if (temp.find('(') < temp.find(')'))
+		  if (temp.find('(') >= 0 && temp.find('(') <= temp.length())
+			  if (temp.find(')') == std::string::npos)
+			  {
+				  throw "Incorrect number of brackets";
+			  }
+			  else
 			  {
 				  temp[temp.find('(')] = ' ';
 				  temp[temp.find(')')] = ' ';
 			  }
-			  else
-			  {
-				  throw "Incorrect number of brackets";
-			  }
+		  else throw "Incorrect number of brackets";
 	  }
 	  return true;
   }
   bool CheckInfix() // Общая проверка
   {
 	  CheckChars();
-	  CheckAmount(infix);
-	  CheckBrackets(infix);
+	  CheckAmount();
+	  CheckBrackets();
 	  if (infix[0] == ')' || infix[0] == '*' || infix[0] == '/' || infix[0] == '-' || infix[0] == '+')
 		  throw "First character is operations";
 	  if (infix[infix.length()] == '(' || infix[infix.length()] == '*' || infix[infix.length()] == '/' || infix[infix.length()] == '-' || infix[infix.length()] == '+')
