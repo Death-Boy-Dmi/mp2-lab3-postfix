@@ -17,14 +17,14 @@ TEST(TPostfix, throw_when_entered_invalid_characters_in_expression)
 
 TEST(TPostfix, throw_when_number_of_variables_does_not_correspond_to_the_numbers_of_operations)
 {
-	string inf = "a+b+";
+	string inf = "a++b";
 
 	ASSERT_ANY_THROW(TPostfix p(inf));
 }
 
-TEST(TPostfix, throw_when_incorrect_number_of_brackets)
+TEST(TPostfix, throw_when_incorrect_number_of_brackets) // FAILED???
 {
-	string inf = "((a+b)";
+	string inf = "((a+b)))";
 
 	ASSERT_ANY_THROW(TPostfix p(inf));
 }
@@ -36,7 +36,7 @@ TEST(TPostfix, throw_when_first_character_is_operations)
 	ASSERT_ANY_THROW(TPostfix p(inf));
 }
 
-TEST(TPostfix, throw_when_last_character_is_operations)
+TEST(TPostfix, throw_when_last_character_is_operations) // FAILED???
 {
 	string inf = "a+b-";
 
@@ -51,13 +51,13 @@ TEST(TPostfix, can_use_ArrVarible)
 	ASSERT_NO_THROW(p.ArrVarible());
 }
 
-TEST(TPostfix, can_use_ArrVarible_2)
+TEST(TPostfix, can_use_ArrVarible_2) // FAILED???
 {
 	string inf = "a+b+c";
 	string arrVar[3];
-	arrVar[0] = "a";
-	arrVar[1] = "b";
-	arrVar[2] = "c";
+	arrVar[0] = "a ";
+	arrVar[1] = "b ";
+	arrVar[2] = "c ";
 	TPostfix p(inf);
 
 	for (int i = 0; i < 3; i++)
@@ -72,7 +72,7 @@ TEST(TPostfix, can_use_ToPostfix)
 	ASSERT_NO_THROW(p.ToPostfix());
 }
 
-TEST(TPostfix, can_use_ToPostfix_2)
+TEST(TPostfix, can_use_ToPostfix_2) // FAILED???
 {
 	string inf = "a+b+c";
 	string post = "ab+c+";
@@ -81,7 +81,7 @@ TEST(TPostfix, can_use_ToPostfix_2)
 	EXPECT_EQ(p.ToPostfix() == post, true);
 }
 
-TEST(TPostfix, can_use_Calculate)
+TEST(TPostfix, can_use_Calculate) // FAILED???
 {
 	string inf = "a+b+c";
 	TPostfix p(inf);
