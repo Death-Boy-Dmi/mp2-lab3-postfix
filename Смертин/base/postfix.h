@@ -54,7 +54,7 @@ public:
   }
   bool CheckAmount() // Проверка соответствия кол-ва переменных кол-ву операций
   {
-	  string str = infix;
+	  string str = " " + infix + " ";
 	  string arop = "-*/+";
 	  string var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	  for (size_t i = 0; i < str.length(); i++)
@@ -70,15 +70,14 @@ public:
   }
   bool CheckBrackets() // Проверка количества скобок
   {
-	  string str;
-	  string temp = str;
+	  string temp = infix;
 	  if (temp.find('(') == std::string::npos && temp.find(')') == std::string::npos)
 		  return true;
 	  if (temp.find("()") >= 0 && temp.find("()") <= temp.length())
 	  {
 		  throw "Detected is ''()''";
 	  }
-	  while (temp.find('(') == std::string::npos || temp.find(')') == std::string::npos)
+	  while (temp.find('(') != std::string::npos || temp.find(')') != std::string::npos)
 	  {
 		  if (temp.find('(') >= 0 && temp.find('(') <= temp.length())
 			  if (temp.find(')') == std::string::npos)
@@ -101,7 +100,7 @@ public:
 	  CheckBrackets();
 	  if (infix[0] == ')' || infix[0] == '*' || infix[0] == '/' || infix[0] == '-' || infix[0] == '+')
 		  throw "First character is operations";
-	  if (infix[infix.length()] == '(' || infix[infix.length()] == '*' || infix[infix.length()] == '/' || infix[infix.length()] == '-' || infix[infix.length()] == '+')
+	  if (infix[infix.length()-1] == '(' || infix[infix.length()-1] == '*' || infix[infix.length()-1] == '/' || infix[infix.length()-1] == '-' || infix[infix.length()-1] == '+')
 		  throw "Last character is operations";
 	  return true;
   }
