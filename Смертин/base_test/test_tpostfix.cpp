@@ -59,10 +59,12 @@ TEST(TPostfix, can_use_ToPostfix)
 	ASSERT_NO_THROW(p.ToPostfix());
 }
 
-TEST(TPostfix, can_use_Calculate) // FAILED???
+
+TEST(TPostfix, can_use_Calculate)
 {
 	string inf = "a+b+c";
 	TPostfix p(inf);
-	double res;
-	ASSERT_NO_THROW(res = p.Calculate());
+	p.ToPostfix();
+
+	ASSERT_NO_THROW(p.Calculate());
 }
