@@ -175,8 +175,6 @@ public:
 
 		  if (inf[0] == '(')
 		  {
-			  if (operations.IsEmpty() == false)
-				  postfix += operations.Get();
 			  operations.Put('(');
 			  inf.erase(0,1);
 		  }
