@@ -1,6 +1,6 @@
 #include "postfix.h"
 #include <gtest.h>
-/*
+
 TEST(TPostfix, can_create_postfix)
 {
 	string inf = "a+b";
@@ -58,7 +58,7 @@ TEST(TPostfix, can_use_ToPostfix)
 
 	ASSERT_NO_THROW(p.ToPostfix());
 }
-*/
+
 TEST(TPostfix, can_use_Calculate) // FAILED???
 {
 	string inf = "a+b+c";
