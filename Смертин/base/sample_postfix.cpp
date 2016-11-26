@@ -6,10 +6,12 @@ using namespace std;
 
 int main()
 {
-  TPostfix postfix;
   double res;
-
+  string inf;
   setlocale(LC_ALL, "Russian");
+  cout << "Enter the expression (variable names - Latin letters):" << endl;
+  cin >> inf;
+  TPostfix postfix(inf);
   cout << "Арифметическое выражение: " << postfix.GetInfix() << endl;
   postfix.ToPostfix();
   cout << "Постфиксная форма: " << postfix.GetPostfix() << endl;
