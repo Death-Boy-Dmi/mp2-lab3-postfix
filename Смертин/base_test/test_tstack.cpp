@@ -20,7 +20,7 @@ TEST(TStack, can_check_on_the_stack_empty)
 {
 	TStack<int> st(2);
 
-	EXPECT_EQ(st.IsEmpty(),true);
+	EXPECT_EQ(st.IsEmpty(), true);
 }
 
 TEST(TStack, can_check_on_the_stack_full)
@@ -34,7 +34,7 @@ TEST(TStack, throw_when_use_Get_when_stack_is_empty)
 {
 	TStack<int> st(5);
 
-	ASSERT_ANY_THROW(st.Get());	
+	ASSERT_ANY_THROW(st.Get());
 }
 
 TEST(TStack, can_use_Get)
@@ -58,10 +58,19 @@ TEST(TStack, can_use_Put)
 
 	ASSERT_NO_THROW(st.Put(0));
 }
-TEST(TStack, chek_Put_and_Get)
+
+TEST(TStack, can_use_GetValTop)
 {
 	TStack<int> st(2);
-	st.Put(13);
-	
-	EXPECT_EQ(st.Get(), 13);
+
+	ASSERT_NO_THROW(st.GetValTop());
+}
+
+TEST(TStack, can_use_GetValTop_2)
+{
+
+	TStack<int> st(1);
+	st.Put(4);
+
+	EXPECT_EQ(st.GetValTop(), 4);
 }
