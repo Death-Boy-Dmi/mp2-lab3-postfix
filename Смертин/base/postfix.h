@@ -47,7 +47,7 @@ public:
 		{
 			if (valval.find(infix[i]) == std::string::npos)
 			{
-				throw "An invalid character was fond";
+				throw "An invalid character was found";
 			}
 		}
 		return true;
