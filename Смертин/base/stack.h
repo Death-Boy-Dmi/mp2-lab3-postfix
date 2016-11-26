@@ -42,14 +42,7 @@ public:
 		  throw 0;
 	  return pMem[top--];
   }
-  int GetTop()
-  {
-	  return top;
-  }
-  int GetSize()
-  {
-	  return size;
-  }
+ 
   T GetValTop()
   {
 	  return pMem[top];

@@ -58,3 +58,19 @@ TEST(TStack, can_use_Put)
 
 	ASSERT_NO_THROW(st.Put(0));
 }
+
+TEST(TStack, can_use_GetValTop)
+{
+	TStack<int> st(2);
+
+	ASSERT_NO_THROW(st.GetValTop());
+}
+
+TEST(TStack, can_use_GetValTop_2)
+{
+
+	TStack<int> st(1);
+	st.Put(4);
+
+	EXPECT_EQ(st.GetValTop(), 4);
+}
