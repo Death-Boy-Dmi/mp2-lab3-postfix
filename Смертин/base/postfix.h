@@ -4,6 +4,7 @@
 #include <string>
 #include "stack.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -42,7 +43,7 @@ public:
 	}
 	bool CheckChars() // Проверка на допустимые символы
 	{
-		string valval = "()*/-+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		string valval = "()*/-+abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.";
 		for (size_t i = 0; i < infix.length(); i++)
 		{
 			if (valval.find(infix[i]) == std::string::npos)
@@ -56,7 +57,7 @@ public:
 	{
 		string str = " " + infix + " ";
 		string arop = "-*/+";
-		string var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		string var = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		for (size_t i = 0; i < str.length(); i++)
 			if (arop.find(str[i]) >= 0 && arop.find(str[i]) <= str.length())
 			{
@@ -143,10 +144,6 @@ public:
 				k++;
 			}
 		}
-	}
-	string* GetArrVar()
-	{
-		return variable;
 	}
 	string ToPostfix()
 	{
@@ -243,12 +240,31 @@ public:
 		double* var = new double[varSize];
 		for (int i = 0; i < varSize; i++)
 		{
-			cout << variable[i] << " = ";
-			cin >> var[i];
-			string c = "0123456789.";
-			if (c.find(var[i]) != std::string::npos)
-				throw "Permission incorrect value";
-			cout << endl;
+
+			string ce = "0123456789.";
+			int j = 0;
+			while (j < variable[i].length())
+			{
+				if (ce.find(variable[i][j]) != std::string::npos)
+					j++;
+				else
+					break;
+			}
+			if (j == variable[i].length())
+			{
+				std::stringstream temp(variable[i]);
+				temp >> var[i];
+			}
+			else
+			{
+
+				cout << variable[i] << " = ";
+				cin >> var[i];
+				string c = "0123456789.";
+				if (c.find(var[i]) != std::string::npos)
+					throw "Permission incorrect value";
+				cout << endl;
+			}
 		}
 		string post = postfix;
 		for (int i = 0; i < post.size(); i++)
@@ -309,6 +325,8 @@ public:
 	}
 	string GetInfix() { return infix; }
 	string GetPostfix() { return postfix; }
+	string* GetArrVar() { return variable; }
+
 };
 
 #endif
