@@ -59,12 +59,29 @@ TEST(TPostfix, can_use_ToPostfix)
 	ASSERT_NO_THROW(p.ToPostfix());
 }
 
+TEST(TPostfix, can_use_ToPostfix_2)
+{
+	string inf = "a+b+c";
+	TPostfix p(inf);
+	string post = "a b +c +";
+
+	EXPECT_EQ(p.ToPostfix(), post);
+}
 
 TEST(TPostfix, can_use_Calculate)
 {
-	string inf = "a+b+c";
+	string inf = "1+2+3";
 	TPostfix p(inf);
 	p.ToPostfix();
 
 	ASSERT_NO_THROW(p.Calculate());
+}
+
+TEST(TPostfix, can_use_Calculate_2)
+{
+	string inf = "2+3+4";
+	TPostfix p(inf);
+	p.ToPostfix();
+
+	EXPECT_EQ(p.Calculate(), 9);
 }
