@@ -67,6 +67,14 @@ TEST(TPostfix, can_use_ToPostfix_2)
 
 	EXPECT_EQ(p.ToPostfix(), post);
 }
+TEST(TPostfix, can_use_ToPostfix_3)
+{
+	string inf = "(a+b*c/d-c)*(f-c/e)";
+	TPostfix p(inf);
+	string post = "a b c *d /c -+f c e /-*";
+
+	EXPECT_EQ(p.ToPostfix(), post);
+}
 
 TEST(TPostfix, can_use_Calculate)
 {
@@ -84,4 +92,13 @@ TEST(TPostfix, can_use_Calculate_2)
 	p.ToPostfix();
 
 	EXPECT_EQ(p.Calculate(), 9);
+}
+
+TEST(TPostfix, can_use_Calculate_3)
+{
+	string inf = "(2+3*2/3-2)*(8-2)";
+	TPostfix p(inf);
+	p.ToPostfix();
+
+	EXPECT_EQ(p.Calculate(), 12);
 }

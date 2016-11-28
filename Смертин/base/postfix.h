@@ -34,6 +34,7 @@ class TPostfix
 	string* variable;
 	size_t varSize;
 	TablFunc functions;
+	double Res;
 
 public:
 	TPostfix(string inf)
@@ -62,7 +63,8 @@ public:
 			if (arop.find(str[i]) >= 0 && arop.find(str[i]) <= str.length())
 			{
 				if ((var.find(str[i - 1]) >= 0 && var.find(str[i - 1]) <= var.length())
-					&& (var.find(str[i + 1]) >= 0 && var.find(str[i - 1]) <= var.length()))
+					&& (var.find(str[i + 1]) >= 0 && var.find(str[i - 1]) <= var.length())
+					|| (str[i + 1] == '(' && str[i - 1] == ')'))
 					continue;
 				else
 					throw "the number of variables does not correspond to the numbers of operations";
@@ -321,7 +323,8 @@ public:
 				post.erase(0, 1);
 			}
 		}
-		return result = varStack.Get();
+		result = varStack.Get();
+		return Res = result;
 	}
 	string GetInfix() { return infix; }
 	string GetPostfix() { return postfix; }
