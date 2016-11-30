@@ -100,5 +100,5 @@ TEST(TPostfix, can_use_Calculate_3)
 	TPostfix p(inf);
 	p.ToPostfix();
 
-	EXPECT_EQ(p.Calculate(), 12);
+		EXPECT_EQ(p.Calculate(), 12);
 }
