@@ -206,8 +206,7 @@ public:
 					if (functions.priority[i] <= functions.priority[j])
 					{
 						postfix += operations.Get();
-						operations.Put(inf[0]);
-						break;
+						
 					}
 					else
 					{
