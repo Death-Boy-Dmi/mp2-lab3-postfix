@@ -71,7 +71,7 @@ TEST(TPostfix, can_use_ToPostfix_3)
 {
 	string inf = "(a+b*c/d-c)*(f-c/e)";
 	TPostfix p(inf);
-	string post = "a b c *d /c -+f c e /-*";
+	string post = "a b c *d /+c -f c e /-*";
 
 	EXPECT_EQ(p.ToPostfix(), post);
 }

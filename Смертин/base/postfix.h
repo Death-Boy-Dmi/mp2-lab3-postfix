@@ -258,7 +258,7 @@ public:
 			else
 			{
 				size_t k = 0;
-				while (k < varSize && i != 0)
+				while (k < i && i != 0)
 					if (variable[i] == variable[k])
 					{
 						var[i] = var[k];
@@ -266,9 +266,7 @@ public:
 					}
 					else
 						k++;
-				if (k < varSize && i != 0)
-					continue;
-				if (k == varSize || i == 0)
+				if (k == i || i == 0)
 				{
 					cout << variable[i] << " = ";
 					cin >> var[i];
