@@ -206,7 +206,6 @@ public:
 					if (functions.priority[i] <= functions.priority[j])
 					{
 						postfix += operations.Get();
-						
 					}
 					else
 					{
@@ -258,13 +257,28 @@ public:
 			}
 			else
 			{
-
-				cout << variable[i] << " = ";
-				cin >> var[i];
-				string c = "0123456789.";
-				if (c.find(var[i]) != std::string::npos)
-					throw "Permission incorrect value";
-				cout << endl;
+				size_t k = 0;
+				while (k < varSize && i != 0)
+					if (variable[i] == variable[k])
+					{
+						var[i] = var[k];
+						break;
+					}
+					else
+						k++;
+				if (k < varSize && i != 0)
+					continue;
+				if (k == varSize || i == 0)
+				{
+					cout << variable[i] << " = ";
+					cin >> var[i];
+					string c = "0123456789.";
+					if (c.find(var[i]) != std::string::npos)
+						throw "Permission incorrect value";
+					cout << endl;
+				}
+				else
+					continue;
 			}
 		}
 		string post = postfix;
